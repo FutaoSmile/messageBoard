@@ -73,13 +73,14 @@ public class IndexController {
         );
         Page<MessageWithCategoryTagDTO> retPage = new Page<>();
         BeanUtils.copyProperties(page, retPage, "records");
-        page.getRecords().stream()
+        List<MessageWithCategoryTagDTO> retList = page.getRecords().stream()
                 .map(x -> {
                     MessageWithCategoryTagDTO target = new MessageWithCategoryTagDTO();
                     BeanUtils.copyProperties(x, target, "category", "tagList");
 
                     return target;
                 }).collect(Collectors.toList());
+        retPage.setRecords(retList);
         return retPage;
     }
 
