@@ -78,7 +78,7 @@ create table `message_board`.`message_board_message`
 create table `message_board`.`message_board_tag`
 (
     id                 BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'ID',
-    `content`          varchar(255) NOT NULL COMMENT '标签名',
+    `tag_name`         varchar(255) NOT NULL COMMENT '标签名',
 
     `create_by`        VARCHAR(100) NOT NULL DEFAULT '' COMMENT '创建者',
     `create_date_time` BIGINT       NOT NULL DEFAULT 0 COMMENT '创建时间戳（单位：毫秒）',
@@ -87,6 +87,19 @@ create table `message_board`.`message_board_tag`
 ) engine = 'innodb'
   charset = 'utf8mb4'
   collate = 'utf8mb4_general_ci' comment '标签表';
+
+create table `message_board`.`message_board_category`
+(
+    id                 BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'ID',
+    `category_name`    varchar(255) NOT NULL COMMENT '分类名',
+
+    `create_by`        VARCHAR(100) NOT NULL DEFAULT '' COMMENT '创建者',
+    `create_date_time` BIGINT       NOT NULL DEFAULT 0 COMMENT '创建时间戳（单位：毫秒）',
+    `update_by`        VARCHAR(100) NOT NULL DEFAULT '' COMMENT '更新者',
+    `update_date_time` BIGINT       NOT NULL DEFAULT 0 COMMENT '更新时间戳（单位：毫秒）'
+) engine = 'innodb'
+  charset = 'utf8mb4'
+  collate = 'utf8mb4_general_ci' comment '分类表';
 
 create table `message_board`.`message_board_message_tag`
 (

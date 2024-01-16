@@ -30,6 +30,10 @@ public class MessageEntity extends BaseIdUserTime {
      */
     private Long userId;
     /**
+     * 关联的分类id
+     */
+    private Long categoryId;
+    /**
      * 浏览量
      */
     private Integer viewCount;
