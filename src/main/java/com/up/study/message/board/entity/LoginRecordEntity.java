@@ -2,7 +2,6 @@ package com.up.study.message.board.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.up.study.message.board.framework.db.entity.base.BaseIdUserTime;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("message_board_login_record")
-@Builder
 public class LoginRecordEntity extends BaseIdUserTime {
     /**
      * 关联的用户id

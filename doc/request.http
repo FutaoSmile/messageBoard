@@ -1,0 +1,40 @@
+## 普通用户注册
+POST http://localhost:8080/message-board/user/register
+Content-Type: application/json
+
+{
+  "phone": "18700000001,",
+  "password": "123456"
+}
+
+
+### 登录
+POST http://localhost:8080/message-board/login/phone-pwd
+Content-Type: application/json
+
+{
+  "phone": "admin",
+  "password": "123456"
+}
+
+### profile
+GET http://localhost:8080/message-board/user/profile
+
+### 分页查询用户列表
+GET http://localhost:8080/message-board/user/page?pageNo=1&pageSize=10&role=
+
+### 新增用户
+POST http://localhost:8080/message-board/user
+Content-Type: application/json
+
+{
+  "username": "wangEr",
+  "phone": "wangEr",
+  "password": "123456",
+  "role": 0,
+  "status": 0,
+  "email": "111@qq.com",
+  "gender": 1,
+  "avatar": "header.jpg",
+  "birthday": 1705334400000
+}

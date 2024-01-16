@@ -2,7 +2,6 @@ package com.up.study.message.board.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.up.study.message.board.framework.user.BasicUser;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("message_board_user")
-@Builder
 public class UserEntity extends BasicUser {
     /**
      * 密码
@@ -48,7 +46,7 @@ public class UserEntity extends BasicUser {
      *
      * @see com.up.study.message.board.entity.enums.GenderEnum
      */
-    private String gender;
+    private Integer gender;
     /**
      * 生日
      */

@@ -2,6 +2,8 @@ package com.up.study.message.board.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.up.study.message.board.entity.UserEntity;
+import com.up.study.message.board.entity.enums.UserStatusEnum;
+import com.up.study.message.board.framework.exception.Asserts;
 import com.up.study.message.board.framework.login.service.LoginService;
 import com.up.study.message.board.framework.user.BasicUser;
 import com.up.study.message.board.service.MessageBoardUserService;
@@ -30,8 +32,11 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public BasicUser loginByPhonePassword(String phone, String password) {
-        return messageBoardUserService.getOne(Wrappers.<UserEntity>lambdaQuery()
+        UserEntity one = messageBoardUserService.getOne(Wrappers.<UserEntity>lambdaQuery()
                 .eq(UserEntity::getPhone, phone)
                 .eq(UserEntity::getPassword, DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8))));
+        Asserts.notNull(one, "手机号或密码错误");
+        Asserts.equals(one.getStatus(), UserStatusEnum.NORMAL.getStatus(), "账号已被禁用");
+        return one;
     }
 }

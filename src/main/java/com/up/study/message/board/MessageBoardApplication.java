@@ -3,6 +3,7 @@ package com.up.study.message.board;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author fish_temp_author
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @MapperScan("com.up.study.message.board.mapper")
 @SpringBootApplication
+@EnableAsync
 public class MessageBoardApplication {
 
     public static void main(String[] args) {
