@@ -1,0 +1,12 @@
+{
+  "projectName": "留言板系统接口",
+  "outPath": "src/main/resources/templates/doc",
+  "allInOne": true,
+  "allInOneDocFileName": "index.html",
+  "createDebugPage": true,
+  "packageFilters": "com.up.study.message.board.controller.*",
+  "responseBodyAdvice": {
+    "className": "com.idle.fish.site.navigation.service.restful.RestResult"
+  },
+  "inlineEnum": true
+}
