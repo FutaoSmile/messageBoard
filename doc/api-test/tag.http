@@ -1,0 +1,4 @@
+POST http://localhost:8080/message-board/tag?tagName=其它
+
+###
+GET http://localhost:8080/message-board/tag/page?pageNo=1&pageSize=10

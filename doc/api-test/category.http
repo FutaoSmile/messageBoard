@@ -1,0 +1,4 @@
+POST http://localhost:8080/message-board/category?categoryName=其他
+
+###
+GET http://localhost:8080/message-board/category/page?pageNo=1&pageSize=10
