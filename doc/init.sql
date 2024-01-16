@@ -62,6 +62,7 @@ create table `message_board`.`message_board_message`
 (
     id                 BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'ID',
     `user_id`          BIGINT       NOT NULL COMMENT '用户ID',
+    `category_id`      BIGINT       NOT NULL COMMENT '分类ID',
     `title`            varchar(255) NOT NULL COMMENT '标题',
     `content`          longtext     NOT NULL COMMENT '内容',
     `view_count`       int          not null default 0 comment '浏览量',
