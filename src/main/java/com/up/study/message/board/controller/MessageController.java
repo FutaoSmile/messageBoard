@@ -2,6 +2,7 @@ package com.up.study.message.board.controller;
 
 import com.up.study.message.board.controller.model.AddMessageReq;
 import com.up.study.message.board.framework.login.annotations.LoginRequire;
+import com.up.study.message.board.framework.user.enums.UserRoleEnum;
 import com.up.study.message.board.service.MessageBoardMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -32,7 +33,7 @@ public class MessageController {
      *
      * @param addMessageReq
      */
-    @LoginRequire
+    @LoginRequire(requireRoles = {UserRoleEnum.ADMIN, UserRoleEnum.NORMAL_USER})
     @PostMapping
     public void addMessage(@RequestBody @Validated AddMessageReq addMessageReq) {
         messageBoardMessageService.addMessage(addMessageReq);

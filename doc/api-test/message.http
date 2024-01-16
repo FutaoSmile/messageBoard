@@ -1,0 +1,13 @@
+POST http://localhost:8080/message-board/message
+Content-Type: application/json
+
+{
+  "title": "感谢组织者的辛勤付出",
+  "content": "非常感谢组织者为我们筹备这次活动，一切都安排得非常周到。大家都玩得很开心，学到了很多知识。再次感谢你们的辛勤付出！",
+  "categoryId": 2,
+  "tagIdList": [
+    2,
+    3,
+    4
+  ]
+}
