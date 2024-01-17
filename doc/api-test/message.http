@@ -2,9 +2,9 @@ POST http://localhost:8080/message-board/message
 Content-Type: application/json
 
 {
-  "title": "感谢组织者的辛勤付出",
-  "content": "非常感谢组织者为我们筹备这次活动，一切都安排得非常周到。大家都玩得很开心，学到了很多知识。再次感谢你们的辛勤付出！",
-  "categoryId": 2,
+    "title": "关于午餐食堂的反馈",
+    "content": "我认为食堂的菜品种类可以再多一些，因为目前的选择有点单一。同时，希望能够增加一些健康饮品的选项，让同学们有更多健康的选择。谢谢大家的努力！",
+  "categoryId": 1,
   "tagIdList": [
     2,
     3,

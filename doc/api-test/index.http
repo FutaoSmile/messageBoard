@@ -1,0 +1,1 @@
+GET http://localhost:8080/message-board/index/message-page?pageNo=1&pageSize=10&categoryId=1&keyword=户外

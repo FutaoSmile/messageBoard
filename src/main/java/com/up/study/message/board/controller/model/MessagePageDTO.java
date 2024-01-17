@@ -3,7 +3,7 @@ package com.up.study.message.board.controller.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author fish_temp_author
@@ -12,6 +12,13 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 public class MessagePageDTO extends BasePageDTO {
-    @NotBlank(message = "请选择分类")
+    /**
+     * 分类
+     */
+    @NotNull(message = "请选择分类")
     private Long categoryId;
+    /**
+     * 关键词搜索
+     */
+    private String keyword;
 }

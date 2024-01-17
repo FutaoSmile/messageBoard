@@ -9,16 +9,22 @@ import com.up.study.message.board.entity.MessageEntity;
 import com.up.study.message.board.entity.TagEntity;
 import com.up.study.message.board.service.MessageBoardCategoryService;
 import com.up.study.message.board.service.MessageBoardMessageService;
+import com.up.study.message.board.service.MessageBoardMessageTagService;
 import com.up.study.message.board.service.MessageBoardTagService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.CollectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +45,8 @@ public class IndexController {
     private MessageBoardTagService messageBoardTagService;
     @Resource
     private MessageBoardMessageService messageBoardMessageService;
+    @Resource
+    private MessageBoardMessageTagService messageBoardMessageTagService;
 
     /**
      * 分类列表
@@ -67,19 +75,30 @@ public class IndexController {
      */
     @GetMapping("/message-page")
     public Page<MessageWithCategoryTagDTO> messagePage(@Validated MessagePageDTO messagePageDTO) {
+        String keyword = messagePageDTO.getKeyword();
         Page<MessageEntity> page = messageBoardMessageService.page(new Page<>(messagePageDTO.getPageNo(), messagePageDTO.getPageSize()), Wrappers.<MessageEntity>lambdaQuery()
                 .eq(MessageEntity::getCategoryId, messagePageDTO.getCategoryId())
+                .and(StringUtils.isNotBlank(keyword), x -> x.like(MessageEntity::getTitle, keyword)
+                        .or()
+                        .like(MessageEntity::getContent, keyword))
                 .orderByDesc(MessageEntity::getId)
         );
         Page<MessageWithCategoryTagDTO> retPage = new Page<>();
         BeanUtils.copyProperties(page, retPage, "records");
-        List<MessageWithCategoryTagDTO> retList = page.getRecords().stream()
-                .map(x -> {
-                    MessageWithCategoryTagDTO target = new MessageWithCategoryTagDTO();
-                    BeanUtils.copyProperties(x, target, "category", "tagList");
-
-                    return target;
-                }).collect(Collectors.toList());
+        List<MessageEntity> records = page.getRecords();
+        List<MessageWithCategoryTagDTO> retList = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(records)) {
+            Map<Long, CategoryEntity> categoryMap = this.categoryList().stream()
+                    .collect(Collectors.toMap(CategoryEntity::getId, Function.identity(), (x1, x2) -> x1));
+            retList = records.stream()
+                    .map(x -> {
+                        MessageWithCategoryTagDTO target = new MessageWithCategoryTagDTO();
+                        BeanUtils.copyProperties(x, target, "category", "tagList");
+                        target.setCategoryEntity(categoryMap.get(x.getCategoryId()));
+                        target.setTagEntityList(messageBoardMessageTagService.queryByMessageId(x.getId()));
+                        return target;
+                    }).collect(Collectors.toList());
+        }
         retPage.setRecords(retList);
         return retPage;
     }
