@@ -5,14 +5,23 @@ import com.up.study.message.board.controller.model.AddUserReq;
 import com.up.study.message.board.controller.model.UserPageReq;
 import com.up.study.message.board.controller.model.UserRegisterBody;
 import com.up.study.message.board.entity.UserEntity;
+import com.up.study.message.board.framework.exception.ApplicationException;
+import com.up.study.message.board.framework.exception.Asserts;
 import com.up.study.message.board.framework.login.annotations.LoginRequire;
 import com.up.study.message.board.framework.user.enums.UserRoleEnum;
+import com.up.study.message.board.framework.util.StrUtils;
 import com.up.study.message.board.service.MessageBoardUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 /**
  * 用户接口
@@ -25,6 +34,9 @@ import javax.annotation.Resource;
 @RequestMapping("/user")
 @Validated
 public class UserController {
+
+    @Value("${app.imgs-dir}")
+    private String imgsDir;
 
     @Resource
     private MessageBoardUserService messageBoardUserService;
@@ -71,5 +83,27 @@ public class UserController {
     @PostMapping
     public void addUser(@RequestBody @Validated AddUserReq addUserReq) {
         messageBoardUserService.addUser(addUserReq);
+    }
+
+    /**
+     * 上传文件
+     *
+     * @param file 文件
+     * @return
+     */
+    @LoginRequire(requireRoles = {UserRoleEnum.ADMIN, UserRoleEnum.NORMAL_USER})
+    @PostMapping("/upload")
+    public String upload(MultipartFile file) {
+        Asserts.notNull(file, "请选择文件");
+        try {
+            String originalFilename = file.getOriginalFilename();
+            String[] split = originalFilename.split("/.");
+            String suffix = split[split.length - 1];
+            String newFileId = StrUtils.uuid() + "." + suffix;
+            Files.write(Paths.get(imgsDir, newFileId), file.getBytes(), StandardOpenOption.CREATE);
+            return newFileId;
+        } catch (IOException e) {
+            throw ApplicationException.ae(e.getMessage(), e);
+        }
     }
 }
