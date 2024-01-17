@@ -1,7 +1,7 @@
 package com.up.study.message.board.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.up.study.message.board.entity.MessageCommonsEntity;
+import com.up.study.message.board.entity.MessageCommentEntity;
 
 /**
  * @author Administrator
@@ -9,7 +9,7 @@ import com.up.study.message.board.entity.MessageCommonsEntity;
  * @createDate 2024-01-16 11:16:12
  * @Entity com.up.study.message.board.MessageBoardMessageCommons
  */
-public interface MessageBoardMessageCommonsMapper extends BaseMapper<MessageCommonsEntity> {
+public interface MessageBoardMessageCommonsMapper extends BaseMapper<MessageCommentEntity> {
 
 }
 

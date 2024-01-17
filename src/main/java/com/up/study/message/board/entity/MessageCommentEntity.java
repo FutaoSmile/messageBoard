@@ -13,12 +13,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("message_board_message_commons")
-public class MessageCommonsEntity extends BaseIdUserTime {
+@TableName("message_board_message_comment")
+public class MessageCommentEntity extends BaseIdUserTime {
     /**
      * 评论用户id
      */
-    private String userId;
+    private Long userId;
     /**
      * 评论的留言id
      */

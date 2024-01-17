@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.up.study.message.board.controller.model.BasePageDTO;
 import com.up.study.message.board.entity.CategoryEntity;
-import com.up.study.message.board.entity.CategoryEntity;
-import com.up.study.message.board.entity.TagEntity;
 import com.up.study.message.board.framework.exception.Asserts;
 import com.up.study.message.board.framework.login.annotations.LoginRequire;
 import com.up.study.message.board.framework.user.enums.UserRoleEnum;
@@ -15,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 分类管理
@@ -59,5 +58,15 @@ public class CategoryController {
         return messageBoardCategoryService.page(new Page<>(basePageDTO.getPageNo(), basePageDTO.getPageSize()), Wrappers.<CategoryEntity>lambdaQuery()
                 .orderByAsc(CategoryEntity::getId)
         );
+    }
+
+    /**
+     * 分类列表
+     *
+     * @return
+     */
+    @GetMapping("/category-list")
+    public List<CategoryEntity> categoryList() {
+        return messageBoardCategoryService.list(Wrappers.<CategoryEntity>lambdaQuery().orderByAsc(CategoryEntity::getId));
     }
 }

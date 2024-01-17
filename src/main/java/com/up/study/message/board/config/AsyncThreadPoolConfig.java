@@ -3,6 +3,7 @@ package com.up.study.message.board.config;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.Executor;
 
@@ -10,6 +11,7 @@ import java.util.concurrent.Executor;
  * @author fish_temp_author
  * @since fish_temp_since
  */
+@Component
 public class AsyncThreadPoolConfig implements AsyncConfigurer {
     @Override
     public Executor getAsyncExecutor() {

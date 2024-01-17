@@ -43,7 +43,7 @@ create table `message_board`.`message_board_login_record`
   charset = 'utf8mb4'
   collate = 'utf8mb4_general_ci' comment '用户登录记录表';
 
-create table `message_board`.`message_board_message_commons`
+create table `message_board`.`message_board_message_comment`
 (
     id                 BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT 'ID',
     `user_id`          BIGINT       NOT NULL COMMENT '用户ID',

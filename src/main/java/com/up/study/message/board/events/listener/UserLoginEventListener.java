@@ -1,4 +1,4 @@
-package com.up.study.message.board.events.listent;
+package com.up.study.message.board.events.listener;
 
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 @Slf4j
 @Async
 @Component
-public class UserLoginListener implements ApplicationListener<UserLoginEvent> {
+public class UserLoginEventListener implements ApplicationListener<UserLoginEvent> {
 
     @Resource
     private MessageBoardLoginRecordService messageBoardLoginRecordService;

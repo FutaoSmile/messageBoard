@@ -1,8 +1,8 @@
 package com.up.study.message.board.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.up.study.message.board.entity.MessageCommonsEntity;
-import com.up.study.message.board.service.MessageBoardMessageCommonsService;
+import com.up.study.message.board.entity.MessageCommentEntity;
+import com.up.study.message.board.service.MessageBoardMessageCommentService;
 import com.up.study.message.board.mapper.MessageBoardMessageCommonsMapper;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
  * @createDate 2024-01-16 11:16:12
  */
 @Service
-public class MessageBoardMessageCommonsServiceImpl extends ServiceImpl<MessageBoardMessageCommonsMapper, MessageCommonsEntity>
-        implements MessageBoardMessageCommonsService {
+public class MessageBoardMessageCommonsServiceImpl extends ServiceImpl<MessageBoardMessageCommonsMapper, MessageCommentEntity>
+        implements MessageBoardMessageCommentService {
 
 }
 

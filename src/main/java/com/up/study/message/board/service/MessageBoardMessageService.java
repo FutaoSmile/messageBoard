@@ -1,7 +1,10 @@
 package com.up.study.message.board.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.up.study.message.board.controller.model.AddMessageReq;
+import com.up.study.message.board.controller.model.MessagePageDTO;
+import com.up.study.message.board.controller.model.MessageWithCategoryTagDTO;
 import com.up.study.message.board.entity.MessageEntity;
 
 /**
@@ -12,4 +15,8 @@ import com.up.study.message.board.entity.MessageEntity;
 public interface MessageBoardMessageService extends IService<MessageEntity> {
 
     void addMessage(AddMessageReq addMessageReq);
+
+    MessageWithCategoryTagDTO detail(Long id);
+
+    Page<MessageWithCategoryTagDTO> page(MessagePageDTO messagePageDTO, Long userId);
 }
