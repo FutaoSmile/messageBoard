@@ -31,3 +31,24 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+node_modules/
+package-lock.json
+yarn.lock
+.npmrc
+.nvmrc
+.pnpm-lock.yaml
+.pnpm-lock.json
+.pnpm-lock.yml
+pnpm-lock.yaml
+pnpm-lock.json
+pnpm-lock.yml
+yarn-error.log
+yarn-error.yml
+yarn-error.json
+yarn-error.txt
+yarn-error.log.old
+yarn-error.log.old.old
+yarn-error.log.old.old.old
+yarn-error.log.old.old.old.old
