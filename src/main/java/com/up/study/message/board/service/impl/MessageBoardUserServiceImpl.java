@@ -1,9 +1,11 @@
 package com.up.study.message.board.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.up.study.message.board.controller.model.AddUserReq;
+import com.up.study.message.board.controller.model.UpdateProfileReq;
 import com.up.study.message.board.controller.model.UserPageReq;
 import com.up.study.message.board.controller.model.UserRegisterBody;
 import com.up.study.message.board.entity.UserEntity;
@@ -74,8 +76,17 @@ public class MessageBoardUserServiceImpl extends ServiceImpl<MessageBoardUserMap
         entity.setRegisterDateTime(TimeUtils.currentTimestamp());
         this.save(entity);
     }
+
+    @Override
+    public UserEntity updateProfile(UpdateProfileReq updateProfileReq) {
+        LambdaUpdateWrapper<UserEntity> updateWrapper = Wrappers.<UserEntity>lambdaUpdate()
+                .set(UserEntity::getUsername, updateProfileReq.getUsername())
+                .set(UserEntity::getAvatar, updateProfileReq.getAvatar())
+                .set(UserEntity::getBirthday, updateProfileReq.getBirthday())
+                .set(UserEntity::getGender, updateProfileReq.getGender())
+                .set(UserEntity::getEmail, updateProfileReq.getEmail())
+                .eq(UserEntity::getId, CurrentUser.getUser().getId());
+        this.update(updateWrapper);
+        return this.getById(CurrentUser.getUser().getId());
+    }
 }
-
-
-
-

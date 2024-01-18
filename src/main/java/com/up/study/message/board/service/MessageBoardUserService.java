@@ -3,6 +3,7 @@ package com.up.study.message.board.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.up.study.message.board.controller.model.AddUserReq;
+import com.up.study.message.board.controller.model.UpdateProfileReq;
 import com.up.study.message.board.controller.model.UserPageReq;
 import com.up.study.message.board.controller.model.UserRegisterBody;
 import com.up.study.message.board.entity.UserEntity;
@@ -21,4 +22,6 @@ public interface MessageBoardUserService extends IService<UserEntity> {
     Page<UserEntity> page(UserPageReq userPageReq);
 
     void addUser(AddUserReq addUserReq);
+
+    UserEntity updateProfile(UpdateProfileReq updateProfileReq);
 }

@@ -38,3 +38,16 @@ Content-Type: application/json
   "avatar": "header.jpg",
   "birthday": 1705334400000
 }
+
+### 修改个人信息
+PUT http://localhost:8080/message-board/user/profile
+Content-Type: application/json
+
+{
+  "username": "超级管理员",
+  "password": "123456",
+  "email": "1185@qq.com",
+  "gender": 1,
+  "avatar": "java.png",
+  "birthday": 1705334400000
+  }
