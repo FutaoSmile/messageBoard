@@ -56,7 +56,7 @@ public class UserController {
      *
      * @return
      */
-    @LoginRequire
+    @LoginRequire(requireRoles = {UserRoleEnum.ADMIN, UserRoleEnum.NORMAL_USER})
     @GetMapping("/profile")
     public UserEntity profile() {
         return messageBoardUserService.profile();

@@ -1,12 +1,13 @@
 {
+  "serverUrl": "http://localhost:8080/message-board",
   "projectName": "留言板系统接口",
   "outPath": "src/main/resources/templates/doc",
   "allInOne": true,
   "allInOneDocFileName": "index.html",
   "createDebugPage": true,
-  "packageFilters": "com.up.study.message.board.controller.*",
+  "packageFilters": "com.up.study.message.board.controller.*,com.up.study.message.board.framework.login.controller.*",
   "responseBodyAdvice": {
-    "className": "com.idle.fish.site.navigation.service.restful.RestResult"
+    "className": "com.up.study.message.board.framework.restful.RestResult"
   },
   "inlineEnum": true
 }

@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class CategoryController {
      */
     @LoginRequire(requireRoles = {UserRoleEnum.ADMIN})
     @PostMapping
-    public void addCategory(@RequestParam String categoryName) {
+    public void addCategory(@RequestParam @NotBlank(message = "分类名不能为空") String categoryName) {
         long count = messageBoardCategoryService.count(Wrappers.<CategoryEntity>lambdaQuery()
                 .eq(CategoryEntity::getCategoryName, categoryName)
         );

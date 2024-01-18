@@ -44,10 +44,10 @@ public class LoginAuthInterceptor implements HandlerInterceptor {
                         .orElseThrow(() -> LogicException.le(ErrorMessages.NOT_LOGIN));
                 Asserts.notNull(sessionUser, ErrorMessages.NOT_LOGIN);
                 BasicUser currentUser = (BasicUser) sessionUser;
+                CurrentUser.set(currentUser);
                 UserRoleEnum[] requireRoles = loginRequire.requireRoles();
                 UserRoleEnum userRoleEnum = EnumUtils.byValueOptional(UserRoleEnum.class, currentUser.getRole()).orElseThrow(() -> LogicException.le("请联系管理员给您设置角色"));
                 Asserts.truth(Arrays.asList(requireRoles).contains(userRoleEnum), ErrorMessages.NOT_PERMIT);
-                CurrentUser.set(currentUser);
             }
         }
         return true;

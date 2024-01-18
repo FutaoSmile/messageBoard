@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotBlank;
 
 /**
  * 标签管理
@@ -30,13 +31,13 @@ public class TagController {
     private MessageBoardTagService messageBoardTagService;
 
     /**
-     * 新增分类
+     * 新增标签
      *
      * @param tagName
      */
     @LoginRequire(requireRoles = {UserRoleEnum.ADMIN})
     @PostMapping
-    public void addTag(@RequestParam String tagName) {
+    public void addTag(@RequestParam @NotBlank(message = "标签名不能为空") String tagName) {
         long count = messageBoardTagService.count(Wrappers.<TagEntity>lambdaQuery()
                 .eq(TagEntity::getTagName, tagName)
         );

@@ -91,8 +91,9 @@ public class MessageBoardMessageServiceImpl extends ServiceImpl<MessageBoardMess
     @Override
     public Page<MessageWithCategoryTagDTO> page(MessagePageDTO messagePageDTO, Long userId) {
         String keyword = messagePageDTO.getKeyword();
+        Long categoryId = messagePageDTO.getCategoryId();
         Page<MessageEntity> page = page(new Page<>(messagePageDTO.getPageNo(), messagePageDTO.getPageSize()), Wrappers.<MessageEntity>lambdaQuery()
-                .eq(MessageEntity::getCategoryId, messagePageDTO.getCategoryId())
+                .eq(categoryId != null, MessageEntity::getCategoryId, categoryId)
                 .eq(userId != null, MessageEntity::getUserId, userId)
                 .and(StringUtils.isNotBlank(keyword), x -> x.like(MessageEntity::getTitle, keyword)
                         .or()
