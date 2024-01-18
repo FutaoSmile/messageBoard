@@ -35,9 +35,6 @@ import java.nio.file.StandardOpenOption;
 @Validated
 public class UserController {
 
-    @Value("${app.imgs-dir}")
-    private String imgsDir;
-
     @Resource
     private MessageBoardUserService messageBoardUserService;
 
@@ -85,25 +82,4 @@ public class UserController {
         messageBoardUserService.addUser(addUserReq);
     }
 
-    /**
-     * 上传文件
-     *
-     * @param file 文件
-     * @return
-     */
-    @LoginRequire(requireRoles = {UserRoleEnum.ADMIN, UserRoleEnum.NORMAL_USER})
-    @PostMapping("/upload")
-    public String upload(MultipartFile file) {
-        Asserts.notNull(file, "请选择文件");
-        try {
-            String originalFilename = file.getOriginalFilename();
-            String[] split = originalFilename.split("/.");
-            String suffix = split[split.length - 1];
-            String newFileId = StrUtils.uuid() + "." + suffix;
-            Files.write(Paths.get(imgsDir, newFileId), file.getBytes(), StandardOpenOption.CREATE);
-            return newFileId;
-        } catch (IOException e) {
-            throw ApplicationException.ae(e.getMessage(), e);
-        }
-    }
 }
