@@ -6,23 +6,14 @@ import com.up.study.message.board.controller.model.UpdateProfileReq;
 import com.up.study.message.board.controller.model.UserPageReq;
 import com.up.study.message.board.controller.model.UserRegisterBody;
 import com.up.study.message.board.entity.UserEntity;
-import com.up.study.message.board.framework.exception.ApplicationException;
-import com.up.study.message.board.framework.exception.Asserts;
 import com.up.study.message.board.framework.login.annotations.LoginRequire;
 import com.up.study.message.board.framework.user.enums.UserRoleEnum;
-import com.up.study.message.board.framework.util.StrUtils;
 import com.up.study.message.board.service.MessageBoardUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 /**
  * 用户接口
